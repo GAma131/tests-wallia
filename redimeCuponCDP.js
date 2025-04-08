@@ -10,7 +10,8 @@ import moment from "moment";
 
 /*
 Función para redimir cupones en el sistema de Petco.
-
+Borra el cupon del sistema CRM.
+Actualiza el estado del cupón en la bd de CDP
 */
 
 let fecha = moment().format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
@@ -29,6 +30,11 @@ const redimirCupones = async (req, res) => {
     103349: "5510332405032405310800000499",
   };
 
+ /*
+ Genera un código de cupon o usa uno predefinido.
+ Elimina el cupon
+ Enviá a CDP
+ */
   async function envio(idClubPetco, promo) {
     let cuponPersonalizado = promo + idClubPetco;
     let promoCode = promoCodes[promo] || cuponPersonalizado;
